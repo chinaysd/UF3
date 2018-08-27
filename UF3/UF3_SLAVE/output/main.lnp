@@ -1,0 +1,8 @@
+".\output\STARTUP.obj",
+".\output\main.obj",
+".\output\key.obj",
+".\output\push.obj",
+".\output\tim1.obj" 
+TO ".\output\main" 
+PRINT(".\list\main.m51") RAMSIZE(256) 
+CODE( 0x100 )

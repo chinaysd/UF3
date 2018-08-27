@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\system.obj",
+".\Objects\tim1.obj",
+".\Objects\test_led.obj",
+".\Objects\uart1.obj",
+".\Objects\S_TouchKeyCFG.obj",
+".\lib\SC92F8X7X_HighReliability_Lib_T1_V0.0.1.LIB" 
+TO ".\Objects\UF3" 
+PRINT(".\Listings\UF3.m51") RAMSIZE(256) 

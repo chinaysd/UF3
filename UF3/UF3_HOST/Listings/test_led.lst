@@ -1,0 +1,52 @@
+C51 COMPILER V9.59.0.0   TEST_LED                                                          08/11/2018 09:55:23 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TEST_LED
+OBJECT MODULE PLACED IN .\Objects\test_led.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE C\test_led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\H;.\lib) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\test_led.lst) TABS(2) OBJECT(.\Objects\test_led.obj)
+
+line level    source
+
+   1          #include "test_led.h"
+   2          
+   3          void Led_Init(void)
+   4          {
+   5   1        //P0CON = 0xFF;  //设置P0为强推挽IO
+   6   1        //P0PH  = 0x00;
+   7   1        //P1CON = 0xFF;  //设置P1为强推挽IO
+   8   1        //P1PH  = 0x00;
+   9   1        P1CON |= 0X08;
+  10   1        P13 = 1;
+  11   1        //P2CON = 0xFF;  //设置P2为强推挽IO
+  12   1        //P2PH  = 0x00;
+  13   1      }
+  14          
+  15          void Led_Open(void)
+  16          {
+  17   1        IO_LED1_OPEN;
+  18   1      }
+  19          
+  20          void Led_Close(void)
+  21          {
+  22   1        IO_LED1_CLOSE;
+  23   1      }
+  24          
+  25          void Led_Reset(void)
+  26          {
+  27   1        IO_LED1_RESET;
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

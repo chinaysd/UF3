@@ -1,0 +1,39 @@
+C51 COMPILER V9.59.0.0   PUSH                                                              06/13/2018 21:58:23 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PUSH
+OBJECT MODULE PLACED IN .\output\push.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE c\push.c OPTIMIZE(8,SPEED) BROWSE NOINTPROMOTE INCDIR(.\h) DEBUG OBJECTEXT
+                    -END PRINT(.\list\push.lst) TABS(2) OBJECT(.\output\push.obj)
+
+line level    source
+
+   1          #include "push.h"
+   2          
+   3          
+   4          
+   5          void Push_Init(void)
+   6          {
+   7   1        P04PM;
+   8   1        P05PM;
+   9   1        P26PM;
+  10   1        P27PM;
+  11   1        PUSHA1_CLOSE;
+  12   1        PUSHA2_CLOSE;
+  13   1        PUSHB1_CLOSE;
+  14   1        PUSHB2_CLOSE;
+  15   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     21    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

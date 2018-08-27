@@ -1,0 +1,37 @@
+C51 COMPILER V9.59.0.0   TIM1                                                              06/13/2018 21:58:24 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TIM1
+OBJECT MODULE PLACED IN .\output\tim1.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE c\tim1.c OPTIMIZE(8,SPEED) BROWSE NOINTPROMOTE INCDIR(.\h) DEBUG OBJECTEXT
+                    -END PRINT(.\list\tim1.lst) TABS(2) OBJECT(.\output\tim1.obj)
+
+line level    source
+
+   1          #include "tim1.h"
+   2          
+   3          
+   4          void Tim1_Init(void)
+   5          {
+   6   1          //TMCON=0x07;             //------111 ;Timer0?Tiemr1?Tiemr2????Fsys
+   7   1          //TMOD=0x11;              //0001 0001  ;Timer0?Timer1??????1  
+   8   1          TH0=(65536-6000)/256;             //?????24M???Fsys?24M*6000=250us;
+   9   1          TH0=(65536-6000)%256;
+  10   1          TR0=0;          
+  11   1          ET0=1;                //Timer0??
+  12   1          TR0=1;
+  13   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     13    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

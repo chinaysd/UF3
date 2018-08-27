@@ -1,0 +1,39 @@
+C51 COMPILER V9.59.0.0   UART1                                                             08/11/2018 09:55:23 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE UART1
+OBJECT MODULE PLACED IN .\Objects\uart1.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE C\uart1.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\H;.\lib) DEBUG OBJECTEXTEND PR
+                    -INT(.\Listings\uart1.lst) TABS(2) OBJECT(.\Objects\uart1.obj)
+
+line level    source
+
+   1          #include "uart1.h"
+   2          
+   3          
+   4          void Uart1_Init(int Freq,long int baud)
+   5          {
+   6   1        OTCON = 0xC0;    //串行接口SSI选择Uart1通信
+   7   1        SSCON0 = 0x50;   //设置通信方式为模式一，允许接收
+   8   1        SSCON1 = Freq*1000000/baud;   //波特率低位控制
+   9   1        SSCON2 = (Freq*1000000/baud)>>8;   //波特率高位控制
+  10   1        IE1 = 0x01;      //开启SSI中断
+  11   1        //EA = 1; 
+  12   1      }
+  13          
+  14          
+  15          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     87    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,38 @@
+C51 COMPILER V9.59.0.0   TIM1                                                              08/11/2018 09:55:22 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TIM1
+OBJECT MODULE PLACED IN .\Objects\tim1.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE C\tim1.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\H;.\lib) DEBUG OBJECTEXTEND PRI
+                    -NT(.\Listings\tim1.lst) TABS(2) OBJECT(.\Objects\tim1.obj)
+
+line level    source
+
+   1          #include "tim1.h"
+   2          
+   3          
+   4          void Tim1_Init(void)
+   5          {
+   6   1        TMCON = 0X07;    //------111 ;Timer0、Tiemr1和Tiemr2选择时钟Fsys
+   7   1        //T1设置
+   8   1        TL1 = (65536 - 48000)%256;   //溢出时间：时钟为Fsys，则24000*（1/Fsys）=1ms;
+   9   1        TH1 = (65536 - 48000)/256;
+  10   1        TR1 = 0;
+  11   1        ET1 = 1;//定时器1允许
+  12   1        TR1 = 1;//打开定时器1
+  13   1        
+  14   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     16    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

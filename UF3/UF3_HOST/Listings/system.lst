@@ -1,0 +1,153 @@
+C51 COMPILER V9.59.0.0   SYSTEM                                                            08/11/2018 09:55:22 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SYSTEM
+OBJECT MODULE PLACED IN .\Objects\system.obj
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE C\system.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\H;.\lib) DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\system.lst) TABS(2) OBJECT(.\Objects\system.obj)
+
+line level    source
+
+   1          #include "system.h"
+   2          
+   3          unsigned long get_key_data,MyKey_Buf_Data;
+   4          unsigned char key_press;
+   5          
+   6          unsigned char flag1 = 0;   //中断标志位
+   7          unsigned int u8time_cnt_50ms;
+   8          unsigned char u8time_cnt_flag;
+   9          
+  10          #if 1
+  11          void send_data(unsigned char mydata)
+  12          {
+  13   1        //u8time_cnt_flag = 1;
+  14   1        //if(u8time_cnt_50ms > 2)
+  15   1        //{
+  16   1        //  u8time_cnt_50ms = 0;
+  17   1        //  u8time_cnt_flag = 0;
+  18   1          SSDAT = mydata;
+  19   1          while(!flag1);
+  20   1          flag1 = 0;
+  21   1        //}
+  22   1              
+  23   1      }
+  24          #endif
+  25          
+  26          void System_Init(void)
+  27          {
+  28   1        Led_Init(); 
+  29   1        Tim1_Init();    
+  30   1        Uart1_Init(6,38400);  
+  31   1        TouchKeyInit();
+  32   1        EA = 1; 
+  33   1      }
+  34          
+  35          
+  36          void System_Handle(void)
+  37          { 
+  38   1        #if 1
+  39   1        if(SOCAPI_TouchKeyStatus&0x80)
+  40   1        {
+  41   2            SOCAPI_TouchKeyStatus &= 0x7f;
+  42   2            get_key_data = TouchKeyScan();
+  43   2            TouchKeyRestart();
+  44   2        }
+  45   1        
+  46   1        if(get_key_data!=0)
+  47   1        {
+  48   2          MyKey_Buf_Data = get_key_data;
+  49   2          if(0x0002 == MyKey_Buf_Data)
+  50   2          {
+  51   3            if(!key_press)
+  52   3            {
+  53   4              key_press = 1;
+  54   4              
+C51 COMPILER V9.59.0.0   SYSTEM                                                            08/11/2018 09:55:22 PAGE 2   
+
+  55   4              send_data(0x10);
+  56   4              Led_Open();
+  57   4            }     
+  58   3          }
+  59   2          else if(0x0040 == MyKey_Buf_Data)
+  60   2          {
+  61   3            if(!key_press)
+  62   3            {
+  63   4              key_press = 1;
+  64   4              Led_Open();
+  65   4              send_data(0x30);
+  66   4            }
+  67   3          }
+  68   2          else if(0x0080 == MyKey_Buf_Data)
+  69   2          {
+  70   3            if(!key_press)
+  71   3            {
+  72   4              key_press = 1;
+  73   4              Led_Open();
+  74   4              send_data(0x20);
+  75   4            }
+  76   3          }
+  77   2          else if(0x8000 == MyKey_Buf_Data)
+  78   2          {
+  79   3            if(!key_press)
+  80   3            {
+  81   4              key_press = 1;
+  82   4              Led_Open();
+  83   4              send_data(0x40);
+  84   4            }
+  85   3          }
+  86   2          else
+  87   2          {
+  88   3            Led_Close();
+  89   3            key_press = 0;
+  90   3            send_data(0x80);
+  91   3          }     
+  92   2        }
+  93   1        else
+  94   1        {
+  95   2          Led_Close();
+  96   2          key_press = 0;
+  97   2          send_data(0x80);
+  98   2          //TouchKeyRestart();
+  99   2        }
+ 100   1       #endif
+ 101   1      }
+ 102          
+ 103          void timer1() interrupt 3
+ 104          {
+ 105   1        TL1 = (65536 - 48000)%256;
+ 106   1        TH1 = (65536 - 48000)/256;
+ 107   1        //Led_Reset();
+ 108   1        if(u8time_cnt_flag)
+ 109   1        {
+ 110   2          u8time_cnt_50ms++;
+ 111   2        }
+ 112   1      }
+ 113          void Uart1_Int() interrupt 7   //Uart1中断函数
+ 114          {
+ 115   1        if(SSCON0&0x02)    //接收标志位判断
+ 116   1        {
+C51 COMPILER V9.59.0.0   SYSTEM                                                            08/11/2018 09:55:22 PAGE 3   
+
+ 117   2          SSCON0&=0xFD;
+ 118   2        }
+ 119   1        if((SSCON0&0x01))  //发送标志位判断
+ 120   1        {
+ 121   2          SSCON0&=0xFE;
+ 122   2        }
+ 123   1        flag1 = 1;
+ 124   1        
+ 125   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    306    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
